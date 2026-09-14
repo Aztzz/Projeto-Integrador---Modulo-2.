@@ -1,2 +1,6 @@
 # Projeto-Integrador---Modulo-2.
-Projeto Integrador do Modulo 2.
+
+O nosso projeto integrador.
+
+LINK DO COMPARTILHAMENTO TEMPO REAL: 
+
