@@ -2,5 +2,4 @@
 
 O nosso projeto integrador.
 
-LINK DO COMPARTILHAMENTO TEMPO REAL: https://prod.liveshare.vsengsaas.visualstudio.com/join?C8AA236D28B9281466751530FD558F48B7E6
-
+LINK DO COMPARTILHAMENTO TEMPO REAL: https://prod.liveshare.vsengsaas.visualstudio.com/join?2612FB81EB818B6FE7476C04314BA82B82E5
