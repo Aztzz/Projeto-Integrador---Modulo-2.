@@ -479,3 +479,158 @@ nav {
 .thebest{
   text-align: center;
 }
+
+/* Melhorias para a vitrine e telas menores */
+.dentrodocard {
+  width: auto;
+  min-width: 0;
+  height: 100%;
+  padding: 14px;
+  background: var(--branco);
+  border-radius: 10px;
+}
+
+.dentrodocard img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.dentrodocard h2 {
+  font-size: 18px;
+}
+
+.dentrodocard button {
+  width: 100%;
+  background-color: var(--marrom);
+}
+
+.dentrodocard [role="status"] {
+  min-height: 1.3em;
+  margin: 8px 0 0;
+  color: var(--marrom-medio);
+  font-size: 13px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  align-items: stretch;
+  gap: 24px;
+}
+
+.topo {
+  height: auto;
+  min-height: 120px;
+  gap: 20px;
+}
+
+.carrossel .banner {
+  position: relative;
+}
+
+.carrossel .banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(29, 15, 8, 0.78), rgba(29, 15, 8, 0.08));
+}
+
+.carrossel .banner .conteudo-banner {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .topo {
+    justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .topo header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .topo nav {
+    position: static;
+    transform: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+  }
+
+  .link {
+    font-size: 14px;
+  }
+
+  .carrossel {
+    height: clamp(340px, 55vw, 480px);
+  }
+
+  .carrossel .banner .conteudo-banner h1 {
+    font-size: clamp(30px, 5.5vw, 46px);
+  }
+
+  .cards {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .topo {
+    min-height: 0;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .topo header img {
+    width: 96px;
+  }
+
+  .topo nav {
+    width: 100%;
+    gap: 9px 14px;
+  }
+
+  .link {
+    font-size: 11px;
+  }
+
+  .carrossel {
+    height: 360px;
+  }
+
+  .carrossel .banner .conteudo-banner {
+    margin: 0 48px;
+  }
+
+  .carrossel .banner .conteudo-banner h1 {
+    font-size: clamp(27px, 8vw, 38px);
+  }
+
+  .carrossel .banner .conteudo-banner p {
+    font-size: 16px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .dentrodocard {
+    padding: 9px;
+  }
+
+  .dentrodocard h2 {
+    font-size: 15px;
+  }
+
+  .dentrodocard p {
+    font-size: 13px;
+  }
+}
