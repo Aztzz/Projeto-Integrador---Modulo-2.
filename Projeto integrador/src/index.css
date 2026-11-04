@@ -527,6 +527,53 @@ nav {
   gap: 20px;
 }
 
+.topo header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.carrinho {
+  position: relative;
+  z-index: 5;
+  color: var(--branco);
+}
+
+.carrinho summary {
+  list-style: none;
+  padding: 10px 13px;
+  border: 1px solid var(--caramelo);
+  border-radius: 7px;
+  background: var(--marrom);
+  color: var(--branco);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.carrinho summary::-webkit-details-marker {
+  display: none;
+}
+
+.carrinho-conteudo {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(320px, 80vw);
+  padding: 12px 16px;
+  border: 1px solid var(--bege);
+  border-radius: 8px;
+  background: var(--branco);
+  color: var(--texto-escuro);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.carrinho-conteudo p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
 .carrossel .banner {
   position: relative;
 }
@@ -552,7 +599,7 @@ nav {
   .topo header {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .topo nav {
@@ -589,6 +636,11 @@ nav {
 
   .topo header img {
     width: 96px;
+  }
+
+  .carrinho summary {
+    padding: 8px 10px;
+    font-size: 13px;
   }
 
   .topo nav {
