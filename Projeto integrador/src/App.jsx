@@ -1,24 +1,39 @@
 // imports de bibliotecas
 import { NavLink, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { FaInstagram, FaFacebookF, FaWhatsapp} from "react-icons/fa";
 // imports de fotos do catalogo
-import Logo from './assets/texas.png'
-import bota from './assets/dgobota.jpg'
-import jaqueta from './assets/Jaqueta Ariat.png'
-import zenz from './assets/calça zenz.webp'
-import colar from './assets/Colar.png'
+import Logo from '../../img/texas.png'
+import bota from '../../img/bota-dgo.jpg'
+import jaqueta from '../../img/jaqueta-ariat.png'
+import zenz from '../../img/calca-zenz.webp'
+import colar from '../../img/colar.png'
 
 // imagens de banners 
-import banner1 from './assets/banner.webp'
-import banner2 from './assets/banner2.webp'
-import banner3 from './assets/banner3.webp.png'
-import banner4 from './assets/banner4.webp'
+import banner1 from '../../img/banner1.webp'
+import banner2 from '../../img/calca-zenz.webp'
+import banner3 from '../../img/bota-dgo.jpg'
+import banner4 from '../../img/jaqueta-ariat.png'
+
+const CarrinhoContext = createContext(null)
 
 function Header (){
+  const { itensCarrinho } = useContext(CarrinhoContext)
+  const totalItens = itensCarrinho.reduce((total, item) => total + item.quantidade, 0)
+
   return(
     <header>
       <img src= {Logo} alt="" />
+      <details className="carrinho">
+        <summary>Sacola ({totalItens})</summary>
+        <div className="carrinho-conteudo" aria-live="polite">
+          {itensCarrinho.length === 0
+            ? <p>Sua sacola está vazia.</p>
+            : itensCarrinho.map((item) => (
+                <p key={item.chave}>{item.titulo} × {item.quantidade} — {item.preco}</p>
+              ))}
+        </div>
+      </details>
     </header>
   )
 }
@@ -157,6 +172,8 @@ function Carrossel() {
 }
 
 function Cardsmaisvedidos({imagem, titulo, preco, descricao, botão}){
+  const { adicionarProduto } = useContext(CarrinhoContext)
+
   return(
     <>
     <div>
@@ -164,12 +181,14 @@ function Cardsmaisvedidos({imagem, titulo, preco, descricao, botão}){
       <h2>{titulo}</h2>
       <p>{descricao}</p>
       <h4>{preco}</h4>
-      <button>{botão}</button>
+      <button type="button" onClick={() => adicionarProduto({ titulo, preco })}>{botão}</button>
     </div>
     </>
   )
 }
 function Masculinoroupas({imagem, titulo, preco, descricao, botão}){
+  const { adicionarProduto } = useContext(CarrinhoContext)
+
   return(
     <>
     <div>
@@ -177,7 +196,7 @@ function Masculinoroupas({imagem, titulo, preco, descricao, botão}){
       <h2>{titulo}</h2>
       <p>{descricao}</p>
       <h4>{preco}</h4>
-      <button>{botão}</button>
+      <button type="button" onClick={() => adicionarProduto({ titulo, preco })}>{botão}</button>
     </div>
     </>
   )
@@ -930,7 +949,7 @@ function Femininop(){
       />
       </div>
        <div className='dentrodocard'>  
-      <Feminior
+      <Femininor
       imagem={jaqueta}
       titulo='Jaqueta Ariat'
       descricao='Uma jaqueta cique e confortavel'
@@ -939,7 +958,7 @@ function Femininop(){
       />
       </div>
        <div className='dentrodocard'>  
-      <Feminior
+      <Femininor
       imagem={bota}
       titulo='Bota DGO'
       descricao='Uma bota chique e confortavel'
@@ -948,7 +967,7 @@ function Femininop(){
       />
       </div>
        <div className='dentrodocard'>  
-      <Feminior
+      <Femininor
       imagem={bota}
       titulo='Bota DGO'
       descricao='Uma bota chique e confortavel'
@@ -1309,7 +1328,23 @@ function POLITICA() {
   )
 }
 function App() {
+  const [itensCarrinho, setItensCarrinho] = useState([])
+
+  function adicionarProduto(produto) {
+    const chave = `${produto.titulo}-${produto.preco}`
+    setItensCarrinho((itensAtuais) => {
+      const itemExistente = itensAtuais.find((item) => item.chave === chave)
+      if (itemExistente) {
+        return itensAtuais.map((item) =>
+          item.chave === chave ? { ...item, quantidade: item.quantidade + 1 } : item
+        )
+      }
+      return [...itensAtuais, { ...produto, chave, quantidade: 1 }]
+    })
+  }
+
   return (
+    <CarrinhoContext.Provider value={{ itensCarrinho, adicionarProduto }}>
     <>
       <div className="topo">
             <Header />
@@ -1331,6 +1366,7 @@ function App() {
       </Routes>
       <FOOTER/>
     </>
+    </CarrinhoContext.Provider>
   )
 }
 
